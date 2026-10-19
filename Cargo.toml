@@ -1,0 +1,19 @@
+[package]
+name = "scrubnotes"
+version = "0.1.0-beta.1"
+edition = "2024"
+description = "Fast VOD and footage review player with timestamped notes"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+eframe = { version = "0.37.0", default-features = false, features = ["glow", "default_fonts", "wayland", "x11", "accesskit"] }
+egui = { version = "0.37.0", features = ["monochrome_emoji_fonts"] }
+libloading = "0.9.0"
+rfd = "0.17.2"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
