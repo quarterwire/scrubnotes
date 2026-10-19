@@ -15,7 +15,8 @@ fn main() -> eframe::Result {
             .with_inner_size([1280.0, 780.0])
             .with_maximized(true)
             .with_min_inner_size([820.0, 520.0])
-            .with_drag_and_drop(true),
+            .with_drag_and_drop(true)
+            .with_icon(egui::IconData { rgba: include_bytes!("../assets/icon-64.rgba").to_vec(), width: 64, height: 64 }),
         ..Default::default()
     };
     eframe::run_native("ScrubNotes", options, Box::new(move |cc| Ok(Box::new(app::App::new(cc, initial)))))

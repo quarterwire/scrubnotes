@@ -415,9 +415,12 @@ fn load_library() -> Result<libloading::Library, String> {
     let exe_dir = std::env::current_exe().ok().and_then(|p| p.parent().map(Path::to_path_buf));
     let mut tried = Vec::new();
     for name in NAMES {
+        // Next to the exe, then in a libmpv/ folder beside it (the layout of the repo root, where
+        // build.ps1 puts ScrubNotes.exe), then wherever the system search path finds it.
         let candidates = exe_dir
             .iter()
-            .map(|dir| dir.join(name).into_os_string())
+            .flat_map(|dir| [dir.join(name), dir.join("libmpv").join(name)])
+            .map(|p| p.into_os_string())
             .chain(std::iter::once(OsString::from(name)));
         for candidate in candidates {
             match unsafe { libloading::Library::new(&candidate) } {

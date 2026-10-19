@@ -55,12 +55,22 @@ Keep `libmpv-2.dll` in the same folder. No install needed.
 
 Requirements: Rust (GNU toolchain) and MinGW-w64 on PATH (`choco install mingw`), plus 7-Zip for the fetch script.
 
+Double-click `build.bat`, or run:
+
+```powershell
+.\build.ps1
+```
+
+This fetches libmpv if it's missing, builds `ScrubNotes.exe` into the project folder, and adds a Start menu shortcut, so it appears when you search "ScrubNotes" in Windows. The exe finds `libmpv-2.dll` in the `libmpv\` folder next to it. Run it again after pulling changes; it closes a running copy before replacing it. `.\build.ps1 -NoShortcut` skips the shortcut.
+
+For development:
+
 ```powershell
 .\scripts\fetch-libmpv.ps1      # downloads libmpv-2.dll into .\libmpv
 cargo run --release -- "D:\vods\run.mp4"
 ```
 
-`build.rs` copies `libmpv-2.dll` next to the executable. To distribute, ship `scrubnotes.exe` and `libmpv-2.dll` together.
+`build.rs` copies `libmpv-2.dll` next to the executable in `target\`. It also embeds the icon and version info with MinGW's `windres`. To distribute, ship `ScrubNotes.exe` and `libmpv-2.dll` together, either in the same folder or with the DLL in a `libmpv\` subfolder.
 
 On Linux/macOS, install libmpv from your package manager (`libmpv2`, `mpv`) instead; the app loads it at runtime.
 
