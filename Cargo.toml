@@ -6,7 +6,7 @@ description = "Fast VOD and footage review player with timestamped notes"
 license = "GPL-3.0-or-later"
 
 [dependencies]
-eframe = { version = "0.37.0", default-features = false, features = ["glow", "default_fonts", "wayland", "x11", "accesskit"] }
+eframe = { version = "0.37.0", default-features = false, features = ["glow", "default_fonts", "wayland", "x11", "accesskit", "clipboard"] }
 egui = { version = "0.37.0", features = ["monochrome_emoji_fonts"] }
 libloading = "0.9.0"
 rfd = "0.17.2"
